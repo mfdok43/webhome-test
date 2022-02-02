@@ -1,0 +1,83 @@
+
+.Comment {
+  margin-bottom: 2px;
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+
+  .text-comment {
+
+    word-break: break-all;
+  }
+}
+
+
+.avatar {
+  width: 80px;
+  border-radius: 80px;
+}
+
+.container{
+  display: flex;
+  list-style: none;
+}
+
+.page{
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.page:hover {
+  background: rgba(0, 0, 0, 0.44);
+}
+
+.disabled{
+  cursor: not-allowed;
+
+}
+
+.active{
+  border: 2px solid #000;
+  font-weight: bold;
+}
+
+.previous{
+  padding: 10px;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.break{
+  padding: 10px;
+}
+
+.next{
+  padding: 10px;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.ava-name {
+  max-width: 10%;
+  hyphens: auto;
+  font-size: 12px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 206, 209, 0.41);
+  text-align: center;
+}
+
+.text-date {
+  margin-left: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+

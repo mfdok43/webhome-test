@@ -1,0 +1,27 @@
+
+form {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  * {
+    box-sizing: border-box;
+  }
+  input, button{
+    width: 100%;
+  }
+  input, button {
+    font-size: 1.2em;
+  }
+  input{
+    margin-bottom: 5px;
+  }
+  button {
+    padding: 8px;
+  }
+
+
+}
+
+.write-comment {
+  height: 200px;
+}

@@ -1,5 +1,6 @@
 import {useState} from "react";
-import {url} from "./App";
+import {url} from "../App";
+import './add-comment.scss'
 
 async function postMessage(name,message) {
 
@@ -34,11 +35,11 @@ export const AddComment = () => {
 
 
     return (
-        <div>
-            <input placeholder='Your name' onChange={e => setName(e.target.value)} type='text'/>
-            <input placeholder='Write a comment' onChange={e => setMessage(e.target.value)} type='text'/>
-            <button onClick={() => postMessage(name,message)}>Post</button>
-        </div>
+        <form>
+            <input placeholder='Your name' onChange={e => setName(e.target.value)} type='text' required/>
+            <input className='write-comment' placeholder='Write a comment' onChange={e => setMessage(e.target.value)} type='text'/>
+            <button disabled={name !== '' && message !== '' ? false : true} onClick={() => postMessage(name,message)}>Post</button>
+        </form>
 
     )
 }
