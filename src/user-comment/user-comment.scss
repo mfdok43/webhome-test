@@ -38,9 +38,10 @@ $breakpoint-mobile: 720px;
 
 
 .ava-name {
+
   word-break: break-all;
-  width: 14%;
-  max-width: 14%;
+  min-width: 13%;
+  max-width: 13%;
   hyphens: auto;
   font-size: 12px;
   padding: 5px;
@@ -51,8 +52,11 @@ $breakpoint-mobile: 720px;
   @media(max-width: $breakpoint-mobile) {
     font-size: 8px;
     min-width: 10%;
-    min-width: 10%;
+    max-width: 10%;
   }
+strong {  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
 
 }
 
@@ -68,7 +72,7 @@ $breakpoint-mobile: 720px;
 
 .date {
   font-size: 14px;
-  margin-left: 520px;
+  margin-left: 530px;
   margin-top: 6px;
   @media(max-width: $breakpoint-mobile) {
     margin-left: 68vw;
@@ -77,4 +81,3 @@ $breakpoint-mobile: 720px;
 
   }
 }
-

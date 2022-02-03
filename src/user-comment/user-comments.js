@@ -4,7 +4,7 @@ import {url} from "../App";
 import "./user-comment.scss"
 import './pagination.scss'
 import ava from '../ava-def.jpg'
-// import {postMessage} from "../add-comment/add-comment";
+import {postMessage} from "../add-comment/add-comment";
 
 
 export function UserComments() {
@@ -14,6 +14,7 @@ export function UserComments() {
     const [currentPage, setCurrentPage] = useState(1)
     const [pageCount, setPageCount] = useState(1)
     const [more, setMore] = useState(false)
+    const [total, setTotal] = useState(0)
 
 
     let getUrl = url + `?page=${currentPage}`
@@ -31,6 +32,7 @@ export function UserComments() {
                     setIsLoaded(true);
                     setItems(result.data);
                     setPageCount(result.last_page)
+                    setTotal(result.total)
                     if (more) {
                         setItems([...items,...result.data]);
                         setMore(false)
@@ -45,7 +47,7 @@ export function UserComments() {
 
 
         console.log(items)
-    }, [currentPage])
+    }, [currentPage,setTotal])
 
 
     const pageLoader = () => {
@@ -68,8 +70,6 @@ export function UserComments() {
                         <div key={index} className='Comment'>
 
                             <div className='ava-name'>
-
-
 
                             <strong> {item.name.length > 20 ? item.name.substring(0, 16) + "...": item.name}</strong>
                             <img className='avatar' src={ava} alt='avatar'/>

@@ -1,8 +1,8 @@
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import {url} from "../App";
 import './add-comment.scss'
 
-async function postMessage(name,message) {
+export async function postMessage(name,message) {
     const data = {
         name:name,
         text:message
@@ -16,14 +16,12 @@ async function postMessage(name,message) {
 
         })
         if (response.status === 200) {
-            // alert('200')
-            return await response.json()
+            return alert('Message sent')
         } else if (response.status !== 200) {
-            return new Error('status is not 200')
+            return alert('status is not 200')
         }
     } catch (err) {
-        // alert('no 200')
-        return new Error('jsonPost failed')
+        return new alert('jsonPost failed')
     }
 }
 
@@ -37,7 +35,9 @@ export const AddComment = () => {
     return (
        <div className='form'>
             <input placeholder='Your name' onChange={e => setName(e.target.value)} type='text' required minLength={1}/>
+           {name === '' ? <div>You must have a name!</div>: <></>}
             <input className='write-comment' placeholder='Write a comment' onChange={e => setMessage(e.target.value)} type='text' required minLength={1}/>
+           {message === '' ? <div>The comment should not be empty, write politely and with reason!</div>: <></>}
             <button disabled={name !== '' && message !== '' ? false : true} onClick={() => postMessage(name,message)}>Post</button>
        </div>
 
