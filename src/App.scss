@@ -1,3 +1,4 @@
+$breakpoint-mobile: 720px;
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
 
 
@@ -9,6 +10,11 @@
   body {
     font-family: Roboto, Sans-serif;
   }
+  @media(max-width: $breakpoint-mobile) {
+    width: 100%;
+    font-size: 12px;
+  }
+
 }
 
 

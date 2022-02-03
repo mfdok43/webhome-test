@@ -1,70 +1,46 @@
+$breakpoint-mobile: 720px;
+
 
 .Comment {
   margin-bottom: 2px;
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.24);
-
   .text-comment {
-
     word-break: break-all;
   }
 }
 
 
+
+
+.see-more-button{
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    padding: 8px;
+
+}
+
+
 .avatar {
+  margin-left: auto;
+  margin-right: auto;
   width: 80px;
   border-radius: 80px;
-}
-
-.container{
-  display: flex;
-  list-style: none;
-}
-
-.page{
-  font-size: 16px;
-  padding: 10px;
-  border: 1px solid #dcdcdc;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.page:hover {
-  background: rgba(0, 0, 0, 0.44);
-}
-
-.disabled{
-  cursor: not-allowed;
-
-}
-
-.active{
-  border: 2px solid #000;
-  font-weight: bold;
-}
-
-.previous{
-  padding: 10px;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.break{
-  padding: 10px;
-}
-
-.next{
-  padding: 10px;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
+  @media(max-width: $breakpoint-mobile) {
+    width: 40px;
+  }
 }
 
 
 .ava-name {
-  max-width: 10%;
+  word-break: break-all;
+  width: 14%;
+  max-width: 14%;
   hyphens: auto;
   font-size: 12px;
   padding: 5px;
@@ -72,12 +48,33 @@
   flex-direction: column;
   background: rgba(0, 206, 209, 0.41);
   text-align: center;
+  @media(max-width: $breakpoint-mobile) {
+    font-size: 8px;
+    min-width: 10%;
+    min-width: 10%;
+  }
+
 }
 
 .text-date {
-  margin-left: 4px;
+  margin: 4px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  @media(max-width: $breakpoint-mobile) {
+    font-size: 11px;
+  }
+}
+
+.date {
+  font-size: 14px;
+  margin-left: 520px;
+  margin-top: 6px;
+  @media(max-width: $breakpoint-mobile) {
+    margin-left: 68vw;
+    font-size: 8px;
+
+
+  }
 }
 

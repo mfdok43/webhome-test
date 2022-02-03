@@ -2,7 +2,9 @@ import {useEffect, useState} from "react";
 import ReactPaginate from "react-paginate";
 import {url} from "../App";
 import "./user-comment.scss"
+import './pagination.scss'
 import ava from '../ava-def.jpg'
+// import {postMessage} from "../add-comment/add-comment";
 
 
 export function UserComments() {
@@ -17,7 +19,7 @@ export function UserComments() {
     let getUrl = url + `?page=${currentPage}`
 
     const handlePageChange = (selectedObject) => {
-        setCurrentPage(selectedObject.selected);
+        setCurrentPage(selectedObject.selected+1);
     };
 
 
@@ -66,7 +68,10 @@ export function UserComments() {
                         <div key={index} className='Comment'>
 
                             <div className='ava-name'>
-                            <strong>{item.name}</strong>
+
+
+
+                            <strong> {item.name.length > 20 ? item.name.substring(0, 16) + "...": item.name}</strong>
                             <img className='avatar' src={ava} alt='avatar'/>
                             </div>
 
@@ -82,12 +87,12 @@ export function UserComments() {
                         </div>
                     ))}
 
-                    <button disabled={currentPage === pageCount-1 ? true : false} className='page' onClick={() => pageLoader()}>Set more</button>
+                    <button disabled={currentPage === pageCount ? true : false} className='see-more-button' onClick={() => pageLoader()}>Seе more</button>
                 {console.log(currentPage)}
               <div className='paginate'>
                 <ReactPaginate
                     pageCount={pageCount}
-                    pageRange={2}
+                    forcePage={currentPage-1}
                     marginPagesDisplayed={4}
                     onPageChange={handlePageChange}
                     containerClassName={'container'}
@@ -95,7 +100,7 @@ export function UserComments() {
                     breakClassName={'page'}
                     nextLinkClassName={'page'}
                     pageClassName={'page'}
-                    disabledClassNae={'disabled'}
+                    disabledClassName={'disabled'}
                     activeClassName={'active'}
                 />
               </div>
