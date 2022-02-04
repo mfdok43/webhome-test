@@ -7,11 +7,13 @@ import {actionFindComments} from "../user-comment/user-comments";
 const url = "https://jordan.ashton.fashion/api/goods/30/comments"
 
 export async function postMessage(name,message,last_page) {
+
+    let currentPage = last_page
+
     const data = {
         name:name,
         text:message
     }
-    // console.log(JSON.stringify(data))
     try {
         let response = await fetch(url, {
             method: 'POST',
@@ -20,7 +22,7 @@ export async function postMessage(name,message,last_page) {
 
         })
         if (response.status === 200) {
-            store.dispatch(actionFindComments(last_page))
+            store.dispatch(actionFindComments('FIND_COMMENTS',currentPage))
             return console.log('Message sent')
         } else if (response.status !== 200) {
             return  new Error('status is not 200')
@@ -52,4 +54,4 @@ export const AddComment = ({comments:{last_page}={}}) => {
     )
 }
 
-export const CAddComment = connect(state => ({comments: state.promise?.findComments?.payload}))(AddComment)
+export const CAddComment = connect(state => ({comments: state.promise}))(AddComment)
