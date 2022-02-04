@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useRef, useState,useEffect} from "react";
 import ReactPaginate from "react-paginate";
 import "./user-comment.scss"
 import './pagination.scss'
@@ -15,34 +15,43 @@ export const actionFindComments = (currentPage) =>
 
 
 
-export function UserComments({comments:{data=[],last_page}={},findComments}) {
+export function UserComments({comments:{data,last_page, current_page}={},findComments}) {
 
-
-const currentPage = useRef(1)
+const [state,setState] = useState(data || [])
 const [more, setMore] = useState(false)
+const currentPage = useRef(current_page || 1)
 
 
+    useEffect(() => {
+        setState(data || [])
+          console.log(state,'lol')
+        console.log(current_page)
+    },[current_page])
 
 
-   const handlePageChange = (selectedObject) => {
+    const handlePageChange = (selectedObject) => {
    currentPage.current = selectedObject.selected+1 //пагинация считается с 0 а бэк с 1
-      console.log(currentPage.current)
        findComments(currentPage.current)
+        console.log(currentPage.current)
     };
 
 
     const seeMore = () => {
-        currentPage.current = (currentPage.current+1)
+        ++currentPage.current
         console.log(currentPage.current)
         setMore(true)
     }
 
-
+    // if (more) {
+    //     setState([...state,...data]);
+    //     console.log(state)
+    //     setMore(false)
+    // }
 
         return (
             <div>
                 {
-                    data.map((item,index) => (
+                    state.map((item,index) => (
                         <div key={index} className='Comment'>
 
                             <div className='ava-name'>
@@ -64,7 +73,9 @@ const [more, setMore] = useState(false)
                     ))}
 
 
-                <button disabled={currentPage.current === last_page ? true : false} className='see-more-button' onClick={() => seeMore()}>Seе more</button>
+                <button disabled={currentPage.current === last_page ? true : false} className='see-more-button' onClick={() => {
+                    seeMore()
+                }}>Seе more</button>
               <div className='paginate'>
                 <ReactPaginate
                     pageCount={last_page}
