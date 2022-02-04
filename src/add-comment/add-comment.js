@@ -1,13 +1,14 @@
 import {useState,useEffect} from "react";
 import {url} from "../App";
 import './add-comment.scss'
+import {connect} from "react-redux";
 
 export async function postMessage(name,message) {
     const data = {
         name:name,
         text:message
     }
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     try {
         let response = await fetch(url, {
             method: 'POST',
@@ -27,7 +28,7 @@ export async function postMessage(name,message) {
 
 
 
-export const AddComment = () => {
+export const AddComment = (onFind) => {
     const [name,setName] = useState('')
     const [message, setMessage] = useState('')
 
@@ -38,9 +39,8 @@ export const AddComment = () => {
            {name === '' ? <div>You must have a name!</div>: <></>}
             <input className='write-comment' placeholder='Write a comment' onChange={e => setMessage(e.target.value)} type='text' required minLength={1}/>
            {message === '' ? <div>The comment should not be empty, write politely and with reason!</div>: <></>}
-            <button disabled={name !== '' && message !== '' ? false : true} onClick={() => postMessage(name,message)}>Post</button>
+            <button disabled={name !== '' && message !== '' ? false : true} onClick={() => {postMessage(name, message); onFind()}}>Post</button>
        </div>
 
     )
 }
-

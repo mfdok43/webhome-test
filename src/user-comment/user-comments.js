@@ -4,7 +4,6 @@ import {url} from "../App";
 import "./user-comment.scss"
 import './pagination.scss'
 import ava from '../ava-def.jpg'
-import {postMessage} from "../add-comment/add-comment";
 
 
 export function UserComments() {
@@ -26,7 +25,7 @@ export function UserComments() {
 
     useEffect(() => {
         fetch(getUrl)
-            .then(res => res.json())
+            .then(result => result.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
@@ -38,7 +37,6 @@ export function UserComments() {
                         setMore(false)
                     }
                 },
-
                 (error) => {
                     setIsLoaded(true);
                     setError(error);
@@ -46,7 +44,7 @@ export function UserComments() {
             )
 
 
-        console.log(items)
+        // console.log(items)
     }, [currentPage,setTotal])
 
 
@@ -88,7 +86,7 @@ export function UserComments() {
                     ))}
 
                     <button disabled={currentPage === pageCount ? true : false} className='see-more-button' onClick={() => pageLoader()}>Seе more</button>
-                {console.log(currentPage)}
+                {/*{console.log(currentPage)}*/}
               <div className='paginate'>
                 <ReactPaginate
                     pageCount={pageCount}
