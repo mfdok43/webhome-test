@@ -1,7 +1,9 @@
 import {useState,useEffect} from "react";
-import {url} from "../App";
+import {url} from "../actionAddComments";
 import './add-comment.scss'
 import {connect} from "react-redux";
+import {store} from "../store";
+import {actionFindComments} from "../user-comment/user-comments";
 
 export async function postMessage(name,message) {
     const data = {
@@ -17,7 +19,8 @@ export async function postMessage(name,message) {
 
         })
         if (response.status === 200) {
-            return alert('Message sent')
+            store.dispatch(actionFindComments())
+            return console.log('Message sent')
         } else if (response.status !== 200) {
             return alert('status is not 200')
         }
@@ -25,6 +28,9 @@ export async function postMessage(name,message) {
         return new alert('jsonPost failed')
     }
 }
+
+
+
 
 
 
@@ -39,7 +45,7 @@ export const AddComment = (onFind) => {
            {name === '' ? <div>You must have a name!</div>: <></>}
             <input className='write-comment' placeholder='Write a comment' onChange={e => setMessage(e.target.value)} type='text' required minLength={1}/>
            {message === '' ? <div>The comment should not be empty, write politely and with reason!</div>: <></>}
-            <button disabled={name !== '' && message !== '' ? false : true} onClick={() => {postMessage(name, message); onFind()}}>Post</button>
+            <button disabled={name !== '' && message !== '' ? false : true} onClick={() => postMessage(name, message)}>Post</button>
        </div>
 
     )
