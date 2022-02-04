@@ -1,11 +1,11 @@
 import {useState,useEffect} from "react";
-import {url} from "../actionAddComments";
 import './add-comment.scss'
 import {connect} from "react-redux";
-import {store} from "../store";
-import {actionFindComments} from "../user-comment/user-comments";
+import {store} from "../redux/store";
 
-export async function postMessage(name,message) {
+const url = "https://jordan.ashton.fashion/api/goods/30/comments"
+
+export async function postMessage(name,message,last_page) {
     const data = {
         name:name,
         text:message
@@ -19,7 +19,7 @@ export async function postMessage(name,message) {
 
         })
         if (response.status === 200) {
-            store.dispatch(actionFindComments())
+            store.dispatch(actionFindComments(last_page))
             return console.log('Message sent')
         } else if (response.status !== 200) {
             return alert('status is not 200')
@@ -34,7 +34,7 @@ export async function postMessage(name,message) {
 
 
 
-export const AddComment = (onFind) => {
+export const AddComment = ({comments:{last_page}={}}) => {
     const [name,setName] = useState('')
     const [message, setMessage] = useState('')
 
@@ -45,8 +45,10 @@ export const AddComment = (onFind) => {
            {name === '' ? <div>You must have a name!</div>: <></>}
             <input className='write-comment' placeholder='Write a comment' onChange={e => setMessage(e.target.value)} type='text' required minLength={1}/>
            {message === '' ? <div>The comment should not be empty, write politely and with reason!</div>: <></>}
-            <button disabled={name !== '' && message !== '' ? false : true} onClick={() => postMessage(name, message)}>Post</button>
+            <button disabled={name !== '' && message !== '' ? false : true} onClick={() => postMessage(name, message,last_page)}>Post</button>
        </div>
 
     )
 }
+
+export const CAddComment = connect(state => ({comments: state.promise?.findComments?.payload}))(AddComment)

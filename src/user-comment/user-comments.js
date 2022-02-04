@@ -1,37 +1,46 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import ReactPaginate from "react-paginate";
-import {url} from "../actionAddComments";
 import "./user-comment.scss"
 import './pagination.scss'
 import ava from '../ava-def.jpg'
 import {connect} from "react-redux";
-// import {actionFindComments} from "../actionAddComments";
-import {store} from "../store";
-import {actionPromise} from "../promiseReducer";
+import {actionPromise,store} from "../redux";
 
-let currentPage=421
 
-let getUrl = url + `?page=${currentPage}`
+const url = "https://jordan.ashton.fashion/api/goods/30/comments"
 
-export const actionFindComments = () =>
-    actionPromise('findComments', fetch(getUrl)
+export const actionFindComments = (currentPage) =>
+    actionPromise('findComments', fetch(url + `?page=${currentPage}`)
         .then(result => result.json()))
 
 
 
+export function UserComments({comments:{data=[],last_page}={},findComments}) {
 
 
-export function UserComments({comments:{data=[],last_page}={}}) {
+const currentPage = useRef(1)
+const [more, setMore] = useState(false)
 
-const [currentPage, setCurrentPage] = useState(1)
+
+
 
    const handlePageChange = (selectedObject) => {
-   setCurrentPage(selectedObject.selected+1);
+   currentPage.current = selectedObject.selected+1 //пагинация считается с 0 а бэк с 1
+      console.log(currentPage.current)
+       findComments(currentPage.current)
     };
+
+
+    const seeMore = () => {
+        currentPage.current = (currentPage.current+1)
+        console.log(currentPage.current)
+        setMore(true)
+    }
+
+
 
         return (
             <div>
-
                 {
                     data.map((item,index) => (
                         <div key={index} className='Comment'>
@@ -54,10 +63,12 @@ const [currentPage, setCurrentPage] = useState(1)
                         </div>
                     ))}
 
+
+                <button disabled={currentPage.current === last_page ? true : false} className='see-more-button' onClick={() => seeMore()}>Seе more</button>
               <div className='paginate'>
                 <ReactPaginate
                     pageCount={last_page}
-                    forcePage={currentPage-1}
+                    forcePage={currentPage.current-1} //пагинация считается с 0 а бэк с 1
                     marginPagesDisplayed={4}
                     onPageChange={handlePageChange}
                     containerClassName={'container'}
@@ -74,7 +85,7 @@ const [currentPage, setCurrentPage] = useState(1)
     }
 
 
-export const CUserComments = connect(state => ({comments: state.promise?.findComments?.payload}))(UserComments)
+export const CUserComments = connect(state => ({comments: state.promise?.findComments?.payload}),{findComments:actionFindComments})(UserComments)
 store.dispatch(actionFindComments())
 
 

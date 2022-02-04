@@ -1,10 +1,9 @@
 import './App.scss';
-import {AddComment} from "./add-comment/add-comment";
-import {CUserComments} from "./user-comment/user-comments";
+import {CAddComment} from "./add-comment";
+import {CUserComments} from "./user-comment";
 import {Provider} from "react-redux";
 
-import {store} from "./store";
-
+import {store} from "./redux";
 
 
 export function App() {
@@ -12,7 +11,7 @@ export function App() {
       <Provider store={store}>
       <div className='App'>
           <h2>Comments</h2>
-          <AddComment />
+          <CAddComment />
           <CUserComments />
       </div>
       </Provider>
