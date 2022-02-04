@@ -2,18 +2,10 @@ import {useRef, useState,useEffect} from "react";
 import ReactPaginate from "react-paginate";
 import "./user-comment.scss"
 import './pagination.scss'
-import ava from '../ava-def.jpg'
 import {connect} from "react-redux";
-import {actionPromise,store} from "../redux";
-
-
-const url = "https://jordan.ashton.fashion/api/goods/30/comments"
-
-
-
-export const actionFindComments = (type, currentPage) =>
-    actionPromise(type, fetch(url + `?page=${currentPage}`)
-        .then(result => result.json()))
+import {store} from "../redux";
+import {actionFindComments} from "../actionAddComments";
+import {Comment} from "./comment";
 
 
 export function UserComments({comments:{data= [],last_page,current_page}={},findComments}) {
@@ -44,25 +36,10 @@ export function UserComments({comments:{data= [],last_page,current_page}={},find
 
         return (
             <div>
+                
                 {
                     data.map((item,index) => (
-                        <div key={index} className='Comment'>
-
-                            <div className='ava-name'>
-
-                                <strong> {item.name.length > 20 ? item.name.substring(0, 16) + "...": item.name}</strong>
-                                <img className='avatar' src={ava} alt='avatar'/>
-                            </div>
-
-
-                            <div className='text-date'>
-                                <div  className='text-comment'>{item.text}</div>
-
-                                <div className='date'>
-                                    <strong>{new Date(item.updated_at).toUTCString().slice(5, -13)} at {new Date(item.updated_at).toLocaleTimeString().slice(0, -3)}</strong>
-                                </div>
-                            </div>
-                        </div>
+               <Comment key={index} item={item} />
                     ))}
 
 

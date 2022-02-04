@@ -2,7 +2,7 @@ import {useState,useEffect} from "react";
 import './add-comment.scss'
 import {connect} from "react-redux";
 import {store} from "../redux/store";
-import {actionFindComments} from "../user-comment/user-comments";
+import {actionFindComments} from "../actionAddComments";
 
 const url = "https://jordan.ashton.fashion/api/goods/30/comments"
 
@@ -23,7 +23,7 @@ export async function postMessage(name,message,last_page) {
         })
         if (response.status === 200) {
             store.dispatch(actionFindComments('FIND_COMMENTS',currentPage))
-            return console.log('Message sent')
+            return alert('Message sent')
         } else if (response.status !== 200) {
             return  new Error('status is not 200')
         }
