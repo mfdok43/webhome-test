@@ -1,2 +1,2 @@
-export {actionPromise,promiseReducer} from "./promiseReducer";
+export {actionDataFinder,findReducer} from "./findReducer";
 export {store} from "./store";

@@ -1,9 +1,9 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import {promiseReducer} from "./promiseReducer";
+import {findReducer} from "./findReducer";
 
 
-export const store = createStore(combineReducers({promise: promiseReducer,}), applyMiddleware(thunk))
+export const store = createStore(combineReducers({promise: findReducer}), applyMiddleware(thunk))
 
 store.subscribe(() => console.log(store.getState()))
 

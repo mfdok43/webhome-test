@@ -1,8 +1,8 @@
-import {useState,useEffect} from "react";
+import {useState} from "react";
 import './add-comment.scss'
 import {connect} from "react-redux";
 import {store} from "../redux/store";
-import {actionFindComments} from "../actionAddComments";
+import {actionFindComments} from "../actionFindComments";
 
 const url = "https://jordan.ashton.fashion/api/goods/30/comments"
 

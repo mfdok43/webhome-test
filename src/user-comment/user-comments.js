@@ -4,7 +4,7 @@ import "./user-comment.scss"
 import './pagination.scss'
 import {connect} from "react-redux";
 import {store} from "../redux";
-import {actionFindComments} from "../actionAddComments";
+import {actionFindComments} from "../actionFindComments";
 import {Comment} from "./comment";
 
 
@@ -15,7 +15,6 @@ export function UserComments({comments:{data= [],last_page,current_page}={},find
     const currentPage = useRef( 1)
 
     useEffect(() => {
-        console.log(current_page,'kurent')
         currentPage.current = current_page || 1
         setState (current_page)
     },[current_page])
@@ -68,47 +67,3 @@ export function UserComments({comments:{data= [],last_page,current_page}={},find
 
 export const CUserComments = connect(state => ({comments: state.promise}),{findComments:actionFindComments})(UserComments)
 store.dispatch(actionFindComments('FIND_COMMENTS'))
-
-
-//
-// const currentPage = useRef(current_page || 1)
-//
-//
-//
-// // useEffect(() => {
-// //     currentPage.current = current_page
-// // },[l])
-//
-// const handlePageChange = (selectedObject) => {
-//     currentPage.current = selectedObject.selected+1 //пагинация считается с 0 а бэк с 1
-//     findComments("FIND_COMMENTS", currentPage.current)
-// };
-//
-//
-//
-// const seeMore = () => {
-//     ++currentPage.current
-//     findComments('SPREAD_COMMENTS',currentPage.current)
-// }
-//
-//
-//
-//
-// const [currentPage,setCurrentPage] = useState(1)
-//
-// useEffect(() => {
-//     setCurrentPage ( currentPage)
-// },[])
-//
-// const handlePageChange = (selectedObject) => {
-//     setCurrentPage (selectedObject.selected+1)
-//     console.log(currentPage)
-//     findComments("FIND_COMMENTS", currentPage)
-// };
-//
-//
-//
-// const seeMore = () => {
-//     setCurrentPage(currentPage => currentPage + 1)
-//     findComments('SPREAD_COMMENTS',currentPage)
-// }
